@@ -108,6 +108,7 @@ class CircleCIJob:
             {"attach_workspace": {"at": "test_preparation"}},
         ]
 
+        self.install_steps.append("pip install soxr==0.4.0b1")
         self.install_steps.append("pip uninstall -y numpy && pip install numpy==2.0.0")
         steps.extend([{"run": l} for l in self.install_steps])
         steps.append({"run": {"name": "Show installed libraries and their size", "command": """du -h -d 1 "$(pip -V | cut -d ' ' -f 4 | sed 's/pip//g')" | grep -vE "dist-info|_distutils_hack|__pycache__" | sort -h | tee installed.txt || true"""}})
