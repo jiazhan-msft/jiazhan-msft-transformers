@@ -878,7 +878,7 @@ class PreTrainedTokenizerFast(PreTrainedTokenizerBase):
 
         return self.__class__(tokenizer_object=tokenizer, **kwargs)
 
-    # Copied from LlamaTokenizerFast (update_post_processor, add_bos_token, add_eos_token)
+
     def update_post_processor(self):
         """
         Updates the underlying post processor with the current `bos_token` and `eos_token`.

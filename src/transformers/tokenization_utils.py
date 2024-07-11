@@ -684,12 +684,12 @@ class PreTrainedTokenizer(PreTrainedTokenizerBase):
                 continue
             if idx == 0 and kwargs.get("add_special_tokens", None) is True:
                 kwargs["add_bos_token"] = getattr(self, "add_bos_token", None)
-            elif idx == len(tokens) - 1 and kwargs.get("add_special_tokens", None) is True:
+            if idx == len(tokens) - 1 and kwargs.get("add_special_tokens", None) is True:
                 kwargs["add_eos_token"] = getattr(self, "add_eos_token", None)
             if token in no_split_token:
                 tokenized_text.append(token)
             else:
-                tokenized_text.extend(self._tokenize(token))
+                tokenized_text.extend(self._tokenize(token, **kwargs))
         # ["This", " is", " something", "<special_token_1>", "else"]
         return tokenized_text
 

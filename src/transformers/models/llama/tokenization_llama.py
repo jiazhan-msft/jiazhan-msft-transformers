@@ -269,10 +269,10 @@ class LlamaTokenizer(PreTrainedTokenizer):
 
         # 1. Encode string + prefix ex: "<unk> Hey"
         tokens = self.sp_model.encode(
-            self.unk_token + text, add_bos=add_bos_token, add_eos=add_eos_token, out_type=str
+            self.unk_token + text if add_bos_token is not True else text, add_bos=add_bos_token, add_eos=add_eos_token, out_type=str
         )
         # 2. Remove self.unk_token from ['<','unk','>', '▁Hey']
-        return tokens[self.unk_token_length :] if len(tokens) >= self.unk_token_length else tokens
+        return tokens[self.unk_token_length :] if len(tokens) >= self.unk_token_length and add_bos_token is not True else tokens
 
     def _convert_token_to_id(self, token):
         """Converts a token (str) in an id using the vocab."""
