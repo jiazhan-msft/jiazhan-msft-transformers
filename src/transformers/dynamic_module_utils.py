@@ -565,7 +565,9 @@ def custom_object_save(obj: Any, folder: Union[str, os.PathLike], config: Option
     # Copy module file to the output folder.
     object_file = sys.modules[obj.__module__].__file__
     dest_file = Path(folder) / (Path(object_file).name)
+    print(f"Copying: object_file={object_file}, dest_file={dest_file}, is_dest_file_exist={os.path.exists(dest_file)}")
     shutil.copy(object_file, dest_file)
+    print(f"Copying done: object_file={object_file}, dest_file={dest_file}, is_dest_file_exist={os.path.exists(dest_file)}")
     result.append(dest_file)
 
     # Gather all relative imports recursively and make sure they are copied as well.
