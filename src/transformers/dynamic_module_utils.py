@@ -567,7 +567,7 @@ def custom_object_save(obj: Any, folder: Union[str, os.PathLike], config: Option
     dest_file = Path(folder) / (Path(object_file).name)
     print(f"os.listdir(folder)={list(os.listdir(folder))}")
     print(f"Copying: object_file={object_file}, dest_file={dest_file}, is_dest_file_exist={os.path.exists(dest_file)}")
-    shutil.copy(object_file, dest_file)
+    shutil.copyfile(object_file, dest_file)
     print(f"Copying done: object_file={object_file}, dest_file={dest_file}, is_dest_file_exist={os.path.exists(dest_file)}")
     result.append(dest_file)
 
@@ -576,7 +576,7 @@ def custom_object_save(obj: Any, folder: Union[str, os.PathLike], config: Option
     print(f"copying relative_import_files={relative_import_files}")
     for needed_file in relative_import_files:
         dest_file = Path(folder) / (Path(needed_file).name)
-        shutil.copy(needed_file, dest_file)
+        shutil.copyfile(needed_file, dest_file)
         result.append(dest_file)
 
     return result
